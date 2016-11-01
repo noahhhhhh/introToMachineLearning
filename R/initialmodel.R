@@ -42,8 +42,12 @@ mod <- xgb.train(params = params
 importance <- xgb.importance(names(dt.test[, !c("HighSalary"), with = F])
                              , model = mod)
 
-# Feature       Gain      Cover Frequence
-# 1:          No_RunsBattedIn 0.57999181 0.44112182 0.2352941
-# 2: Ind_FreeAgentEligibility 0.23402302 0.02943097 0.2352941
-# 3:                  No_Hits 0.13998788 0.41169083 0.2352941
-# 4:                  No_Runs 0.04599729 0.11775638 0.2941176
+# Feature        Gain       Cover  Frequence
+# 1:          No_RunsBattedIn 0.831879870 0.511443436 0.34482759
+# 2: Ind_FreeAgentEligibility 0.112880532 0.021119876 0.17241379
+# 3:               No_Doubles 0.032278718 0.015840950 0.17241379
+# 4:              No_HomeRuns 0.009273722 0.349833503 0.13793103
+# 5:                No_Errors 0.005391903 0.007034047 0.06896552
+# 6:                  No_Runs 0.002854036 0.087688408 0.03448276
+# 7:           No_StolenBases 0.002721812 0.003519355 0.03448276
+# 8:            No_StrikeOuts 0.002719406 0.003520425 0.03448276

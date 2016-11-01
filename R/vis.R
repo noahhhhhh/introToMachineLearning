@@ -57,3 +57,42 @@ plot_ly(dt.plot, x = ~No_RunsBattedIn, y = ~No_Hits, z = ~Ind_FreeAgentEligibili
         , color = ~Salary
         , colors=c("#0066CC","red")) %>% add_markers()
 
+
+# splits ------------------------------------------------------------------
+
+g.split1 <- ggplot(dt.plot, aes(x = No_RunsBattedIn, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.split1
+
+g.subset1 <- ggplot(dt.plot[No_RunsBattedIn >= 83], aes(x = No_RunsBattedIn, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.subset1
+
+g.split2 <- ggplot(dt.plot[No_RunsBattedIn >= 83], aes(x = No_Doubles, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.split2
+
+g.subset2 <- ggplot(dt.plot[No_RunsBattedIn >= 83 & No_Doubles < 42], aes(x = No_Doubles, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.subset2
+
+g.split3 <- ggplot(dt.plot[No_RunsBattedIn >= 83 & No_Doubles < 42], aes(x = No_HomeRuns, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.split3
+
+g.subset3 <- ggplot(dt.plot[No_RunsBattedIn >= 83 & No_Doubles >= 42 & No_HomeRuns >= 29], aes(x = No_HomeRuns, fill = Salary)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme_bw() +
+    geom_histogram(position = "dodge")
+g.subset3
+
