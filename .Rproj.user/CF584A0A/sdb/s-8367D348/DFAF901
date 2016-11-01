@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "require(xgboost)\n\n###########################################################################\n## red ####################################################################\n###########################################################################\n# 1. xgb DMatrix ----------------------------------------------------------\n\nmx.train <- as.matrix(dt.train[, !c(\"HighSalary\"), with = F])\nmx.test <- as.matrix(dt.test[, !c(\"HighSalary\"), with = F])\n\ndmx.train <- xgb.DMatrix(data = mx.train, label = dt.train$HighSalary)\ndmx.test <- xgb.DMatrix(data = mx.test, label = dt.test$HighSalary)\n\n\n# 2. params ---------------------------------------------------------------\n\nwatchlist <- list(test = dmx.test, train = dmx.train)\nparams <- list(objective = \"binary:logistic\"\n               , booster = \"gbtree\"\n               , eval_metric = \"auc\"\n               , eta = 0.02\n               , max_depth = 4\n               , subsample = 1\n)\n\n\n# 3. model ----------------------------------------------------------------\n\nset.seed(1)\nmod <- xgb.train(params = params\n                 , data = dmx.train\n                 , watchlist = watchlist\n                 , nrounds = 10\n                 , verbose = 1\n                 , print.every.n = 1\n                 , early.stop.round = 3\n                 , maximize = F)\n\n\n# 4. importance -----------------------------------------------------------\n\nimportance <- xgb.importance(names(dt.test[, !c(\"HighSalary\"), with = F])\n                             , model = mod)\n\n# Feature       Gain      Cover Frequence\n# 1:          No_RunsBattedIn 0.57999181 0.44112182 0.2352941\n# 2: Ind_FreeAgentEligibility 0.23402302 0.02943097 0.2352941\n# 3:                  No_Hits 0.13998788 0.41169083 0.2352941\n# 4:                  No_Runs 0.04599729 0.11775638 0.2941176",
+    "created" : 1477976498805.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "851193964",
+    "id" : "DFAF901",
+    "lastKnownWriteTime" : 1477976845,
+    "last_content_update" : 1477976845343,
+    "path" : "/Volumes/Data Science/Google Drive/science_experiments/introToMachineLearning/R/initialmodel.R",
+    "project_path" : "R/initialmodel.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "require(data.table)\nrequire(caret)\n\n\n# load --------------------------------------------------------------------\n\ndt.all <- fread(\"data/baseball.txt\")\nsetnames(dt.all, names(dt.all), c(\"Salary\"\n                                  , \"Avg_Batting\"\n                                  , \"Perc_OnBase\"\n                                  , \"No_Runs\"\n                                  , \"No_Hits\"\n                                  , \"No_Doubles\"\n                                  , \"No_Triples\"\n                                  , \"No_HomeRuns\"\n                                  , \"No_RunsBattedIn\"\n                                  , \"No_Walks\"\n                                  , \"No_StrikeOuts\"\n                                  , \"No_StolenBases\"\n                                  , \"No_Errors\"\n                                  , \"Ind_FreeAgentEligibility\"\n                                  , \"Ind_FreeAgent\"\n                                  , \"Ind_ArbitrationEligibility\"\n                                  , \"Ind_Arbitration\"))\n\n\n# transform ---------------------------------------------------------------\n\ndt.all[, HighSalary := ifelse(Salary >= 3700, 1, 0)]\ndt.all[, Salary := NULL]\n\n# split -------------------------------------------------------------------\n\nind.train <- createDataPartition(dt.all$HighSalary, p = .8, list = F)\ndt.train <- dt.all[ind.train]\ndt.test <- dt.all[-ind.train]\n\n\n",
+    "created" : 1477975816404.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3548246115",
+    "id" : "8B3A1C95",
+    "lastKnownWriteTime" : 1477978726,
+    "last_content_update" : 1477978726848,
+    "path" : "/Volumes/Data Science/Google Drive/science_experiments/introToMachineLearning/R/transform.R",
+    "project_path" : "R/transform.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
